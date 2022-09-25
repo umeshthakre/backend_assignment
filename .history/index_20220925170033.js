@@ -346,6 +346,6 @@ app.get("/api/all_posts", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-module.exports = app.listen(PORT, (req, res) => {
+app.listen(PORT, (req, res) => {
   console.log("server is running on " + PORT);
 });

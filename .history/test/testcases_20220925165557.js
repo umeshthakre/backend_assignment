@@ -10,7 +10,6 @@ const { response } = require("express");
 chai.use(chaiHttp);
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjMyZWNmYWQ0OWRmOWVjNWRlODZlOWFiIiwiZW1haWwiOiJ0ZXN0bWFpbEBnbWFpbGNvbSIsImlhdCI6MTY2NDAyNjQyMCwiZXhwIjoxNjY0ODI1NjIwfQ.aMpcCEkc2OwHQajcI3t_kpfyQWYnJA5OKENUzPBlbjA";
-
 describe("Get all posts sorted by post time", (req, res) => {
   it("get all posts", (done) => {
     chai
@@ -29,13 +28,15 @@ describe("Get all posts sorted by post time", (req, res) => {
   //       chai
   //         .request(server)
   //         .post("/api/authenticate")
-  //         .set("content-type", "application/json")
-  //         .send({ email: "testmail@gmailcom", password: "testpassword" })
+  //         // .set("content-type", "application/json")
+  //         .send(body)
   //         .end((err, response) => {
   //           if (err) {
   //             done(err);
+  //           } else {
+  //             expect(response.body).to.have.all.keys("token");
+  //             done();
   //           }
-  //           expect(response.body).to.have.all.keys("token");
   //           done();
   //         });
   //     });
@@ -54,7 +55,7 @@ describe("Get all posts sorted by post time", (req, res) => {
             done(err);
           } else {
             done();
-            expect(response.body).to.have.all.property("mesg");
+            expect(response.body).to.have.all.keys("mesg");
           }
         });
     });
@@ -74,74 +75,10 @@ describe("Get all posts sorted by post time", (req, res) => {
           if (err) {
             done(err);
           }
-
+          console.log(response.body);
           expect(response.body).to.have.all.property("title");
 
           done(err);
-        });
-    });
-  });
-
-  describe("Post getting deleted", (req, res) => {
-    it("delete post", (done) => {
-      chai
-        .request(server)
-        .delete("/api/posts/632f13934bf328c68c581a73")
-        .set({ Authorization: `Bearer ${token}` })
-        .end((err, response) => {
-          if (err) {
-            done(err);
-          }
-          expect(response.body).to.have.property("mesg");
-          done();
-        });
-    });
-  });
-
-  describe("Post getting liked", (req, res) => {
-    it("post getting liked by user", (done) => {
-      chai
-        .request(server)
-        .post("/api/like/632f13934bf328c68c581a73")
-        .set({ Authorization: `Bearer ${token}` })
-        .end((err, response) => {
-          if (err) {
-            done(err);
-          }
-          expect(response.body).to.have.property("msg");
-          done();
-        });
-    });
-  });
-
-  describe("Comment getting added to the post", (req, res) => {
-    it("Comment gettting added to the post with given id", (done) => {
-      chai
-        .request(server)
-        .post("/api/comment/632f13934bf328c68c581a73")
-        .set({ Authorization: `Bearer ${token}` })
-        .end((err, response) => {
-          if (err) {
-            done(err);
-          }
-          expect(response.body).to.have.property("mesg");
-          done();
-        });
-    });
-  });
-
-  describe("get a single post", (req, res) => {
-    it("getting a single post with given id", (done) => {
-      chai
-        .request(server)
-        .get("/api/post/632f13934bf328c68c581a73")
-        .set({ Authorization: `Bearer ${token}` })
-        .end((err, response) => {
-          if (err) {
-            done(err);
-          }
-          expect(response.body).to.have.property("id");
-          done();
         });
     });
   });

@@ -98,7 +98,6 @@ app.post("/api/authenticate", async (req, res) => {
 
 app.post("/api/follow/:id", isAuthorised, (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
   if (!mongodb.ObjectId.isValid(id)) {
     return res.send({ mesg: "object id not valid" });
@@ -111,7 +110,7 @@ app.post("/api/follow/:id", isAuthorised, (req, res) => {
       }
 
       if (user.followers.includes(id)) {
-        return res.send({ mesg: "you already follow this person" });
+        return res.send({ meg: "you already follow this person" });
       }
       user.numberOfFollowers++;
       user.followers.push(id);
@@ -125,10 +124,7 @@ app.post("/api/follow/:id", isAuthorised, (req, res) => {
         },
         { new: true },
         (doc) => {
-          return res.send({
-            mesg: "follower added succesfully",
-            numberOfFollowers: user.numberOfFollowers,
-          });
+          return res.send({ mesg: "follower added succesfully" });
         }
       );
       console.log(user);

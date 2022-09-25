@@ -29,13 +29,15 @@ describe("Get all posts sorted by post time", (req, res) => {
   //       chai
   //         .request(server)
   //         .post("/api/authenticate")
-  //         .set("content-type", "application/json")
-  //         .send({ email: "testmail@gmailcom", password: "testpassword" })
+  //         // .set("content-type", "application/json")
+  //         .send(body)
   //         .end((err, response) => {
   //           if (err) {
   //             done(err);
+  //           } else {
+  //             expect(response.body).to.have.all.keys("token");
+  //             done();
   //           }
-  //           expect(response.body).to.have.all.keys("token");
   //           done();
   //         });
   //     });
@@ -125,23 +127,6 @@ describe("Get all posts sorted by post time", (req, res) => {
             done(err);
           }
           expect(response.body).to.have.property("mesg");
-          done();
-        });
-    });
-  });
-
-  describe("get a single post", (req, res) => {
-    it("getting a single post with given id", (done) => {
-      chai
-        .request(server)
-        .get("/api/post/632f13934bf328c68c581a73")
-        .set({ Authorization: `Bearer ${token}` })
-        .end((err, response) => {
-          if (err) {
-            done(err);
-          }
-          expect(response.body).to.have.property("id");
-          done();
         });
     });
   });

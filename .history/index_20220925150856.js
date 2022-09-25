@@ -98,7 +98,6 @@ app.post("/api/authenticate", async (req, res) => {
 
 app.post("/api/follow/:id", isAuthorised, (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
   if (!mongodb.ObjectId.isValid(id)) {
     return res.send({ mesg: "object id not valid" });
