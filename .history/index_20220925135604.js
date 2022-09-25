@@ -328,7 +328,7 @@ app.get("/api/post/:id", isAuthorised, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get("/api/all_posts", (req, res) => {
+app.get("/api/all_posts", isAuthorised, (req, res) => {
   Post.find()
     .then((posts) => {
       if (!posts) {
