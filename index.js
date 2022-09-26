@@ -10,8 +10,11 @@ const mongoose = require("mongoose");
 const isAuthorised = require("./auth");
 const mongodb = require("mongodb");
 const Post = require("./models/Post");
+
 //users middleware to parse json
 app.use(express.json());
+app.use(express.static(__dirname));
+
 
 //connect to db
 mongoose
@@ -27,7 +30,7 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  return res.send("<h1>hiii</h1>");
+  return res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/api/register", async (req, res) => {
