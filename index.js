@@ -220,7 +220,7 @@ app.post("/api/posts", isAuthorised, (req, res) => {
     });
 });
 
-app.delete("/api/posts/:id", isAuthorised, (req, res) => {
+app.delete("/api/posts/:id", (req, res) => {
   const id = req.params.id;
 
   if (!mongodb.ObjectId.isValid(id)) {
